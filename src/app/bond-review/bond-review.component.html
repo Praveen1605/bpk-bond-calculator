@@ -1,1 +1,60 @@
-<p>bond-review works!</p>
+<section>
+    <article>
+        <div>
+            <span class="form-text">Initial Investment : </span><span class="ml-10p"><p-inputNumber [(ngModel)]="initialBalance" mode="currency" currency="INR" locale="en-IN" [minFractionDigits]="2"></p-inputNumber></span>
+        </div>
+        <br>
+        <div>
+            <span class="form-text">Monthly Deposit : </span><span class="ml-22p"><p-inputNumber [(ngModel)]="monthlyInvestment" mode="currency" currency="INR" locale="en-IN" [minFractionDigits]="2"></p-inputNumber></span>
+        </div>
+        <br>
+        <div>
+            <span class="form-text">Investment Period: </span>
+            <span class="p-input-icon-right ml-15p">
+                <i class="pi pi-calendar"></i>
+                <p-inputNumber [(ngModel)]="calculationPeriod" mode="decimal"></p-inputNumber>
+            </span>
+        </div>
+        <br>
+        <div>
+            <span class="form-text">Interest Rate: </span>
+            <span class="p-input-icon-right ml-64p">
+                <i class="pi pi-money-bill"></i>
+                <p-inputNumber [(ngModel)]="interestRate" mode="decimal"></p-inputNumber>
+            </span>
+        </div>
+        <br>
+        <button pButton type="button" label="Submit" click="setTableData()" class="p-button-text"></button>
+        <br>
+        <p-table [value]="bondTable">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Month</th>
+                    <th>Invested amount</th>
+                    <!-- <th>Monthly Invested amount</th> -->
+                    <th>Monthly Invested on Interest Output</th>
+                    <th>Reinvested Amount</th>
+                    <th>Total Monthly Investment</th>
+                    <th>Interest Gained This Month</th>
+                    <th>Total Interest Gained</th>
+                    <th>Remainder Balance</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-list>
+                <tr>
+                    <td class="to-align-text-center">{{list.month}}</td>
+                    <td class="to-align-text-center">{{list.investedTotal}}</td>
+                    <!-- <td class="to-align-text-center">{{list.monthlyInvestment}}</td> -->
+                    <td class="to-align-text-center">{{list.monthlyInvestment}}</td>
+                    <td class="to-align-text-center">{{list.bondReinvestedCount}}</td>
+                    <td class="to-align-text-center" [ngStyle]="{color: list.totalMonthlyInvestment > 10000?'green':'red'}">{{list.totalMonthlyInvestment}}</td>
+                    <td class="to-align-text-center">{{list.monthlyInterestEarning}}</td>
+                    <td class="to-align-text-center">{{list.totalInterestEarned}}</td>
+                    <td class="to-align-text-center">{{list.reminderBalance}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </article>
+</section>
+
+
